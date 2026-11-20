@@ -30,12 +30,19 @@ st.write(dt.head(10))
 
 # คำนวณค่าเฉลี่ยของตัวแปรเชิงตัวเลขหลักๆ เพื่อนำมาแสดงกราฟ (ใช้ค่าเฉลี่ยจะเห็นภาพชัดกว่าผลรวม)
 dt1 = dt['Age'].mean()
-dt2 = dt['RestingBP'].mean()
-dt3 = dt['Cholesterol'].mean()
-dt4 = dt['MaxHR'].mean()
+dt2 = dt['Sex'].mean()
+dt3 = dt['ChestPainType'].mean()
+dt4 = dt['RestingBP'].mean()
+dt5 = dt['Cholesterol'].mean()
+dt6 = dt['FastingBS'].mean()
+dt7 = dt['RestingECG'].mean()
+dt8 = dt['MaxHR'].mean()
+dt9 = dt['ExerciseAngina'].mean()
+dt10 = dt['Oldpeak'].mean()
+dt11 = dt['ST_Slope'].mean()
 
-dx = [dt1, dt2, dt3, dt4]
-dx2 = pd.DataFrame(dx, index=["Age (อายุ)", "RestingBP (ความดัน)", "Cholesterol (ไขมัน)", "MaxHR (ชีพจรสูงสุด)"], columns=["ค่าเฉลี่ย"])
+dx = [dt1, dt2, dt3, dt4, dt5, dt6, dt7, dt8, dt9, dt10, dt11]
+dx2 = pd.DataFrame(dx, index=["Age (อายุ)","Sex(เพศ)","ChestPainType(อาการเจ็บหน้าอก)" , "RestingBP (ความดัน)", "Cholesterol (ไขมัน)","Fasting(น้ำตาลในเลือด)","RestingECG(คลื่นไฟฟ้าหัวใจขณะพัก)" , "MaxHR (ชีพจรสูงสุด)", "ExerciseAngina(เจ็บหน้าอกขณะออกกำลังกาย)", "Oldpeak(ค่าความผิดปกติของคลื่นหัวใจ)", "ST_Slope(ความชันกราฟ)"], columns=["ค่าเฉลี่ย"])
 
 if st.button("แสดงการจินตทัศน์ข้อมูล"):
     st.bar_chart(dx2)
