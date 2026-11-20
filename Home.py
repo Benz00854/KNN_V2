@@ -6,15 +6,16 @@ import numpy as np
 import os
 
 # ---------------------------------------------------------
-# 1. ตั้งค่าหน้าเว็บและตกแต่ง CSS สไตล์ Kawaii Pastel ✨💖
+# 1. ตั้งค่าหน้าเว็บและโหลด Bootstrap Icons + CSS สไตล์ Kawaii Pastel
 # ---------------------------------------------------------
 st.set_page_config(
-    page_title="💖 CardioKawaii | เช็กสุขภาพหัวใจสุดคิวท์",
-    page_icon="💖",
+    page_title="CardioKawaii | ระบบจำแนกความเสี่ยงโรคหัวใจ",
+    page_icon=":material/favorite:",
     layout="wide"
 )
 
 st.markdown("""
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap');
     
@@ -33,7 +34,7 @@ st.markdown("""
 
     /* แบนเนอร์หัวเว็บสุดคิวท์ */
     .kawaii-banner {
-        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
         padding: 2.2rem;
         border-radius: 28px;
         border: 3px dashed #ffffff;
@@ -45,14 +46,14 @@ st.markdown("""
     .kawaii-banner h1 {
         color: #9f1239;
         margin: 0;
-        font-size: 2.4rem;
+        font-size: 2.3rem;
         font-weight: 700;
         text-shadow: 2px 2px 0px #ffffff;
     }
     .kawaii-banner p {
         color: #be123c;
         margin-top: 0.6rem;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 500;
     }
 
@@ -109,6 +110,18 @@ st.markdown("""
     .stButton > button:hover {
         transform: scale(1.03) !important;
     }
+    
+    /* ปรับแต่งหัวข้อย่อยที่มีไอคอน */
+    .sub-title-icon {
+        font-family: 'Mali', cursive;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #9f1239;
+        margin-bottom: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -117,36 +130,36 @@ def show_safe_image(path, caption=""):
     if os.path.exists(path):
         st.image(path, caption=caption, use_container_width=True)
     else:
-        st.warning(f"🥺 เอ๊ะ! หาไฟล์รูปไม่เจอ: {path}")
+        st.warning(f"ไม่พบไฟล์รูปภาพ: {path}", icon=":material/broken_image:")
 
 # ---------------------------------------------------------
-# 2. ส่วนหัวของเว็บและการ์ดเปรียบเทียบ 2 กลุ่ม 🌸
+# 2. ส่วนหัวของเว็บและการ์ดเปรียบเทียบ 2 กลุ่ม
 # ---------------------------------------------------------
 st.markdown("""
 <div class="kawaii-banner">
-    <h1>💖 โปรเจคการจำแนกข้อมูลโรคหัวใจ ✨</h1>
-    <p>🩺 น้อง AI ช่วยวิเคราะห์ความเสี่ยงโรคหัวใจด้วยเทคนิค K-Nearest Neighbors (KNN) 🌸</p>
+    <h1><i class="bi bi-heart-pulse-fill"></i> โปรเจคการจำแนกข้อมูลโรคหัวใจ</h1>
+    <p><i class="bi bi-stars"></i> ระบบวิเคราะห์ข้อมูลทางคลินิกและพยากรณ์ความเสี่ยงด้วยเทคนิค K-Nearest Neighbors (KNN)</p>
 </div>
 """, unsafe_allow_html=True)
 
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
-    st.markdown('<div class="kawaii-card"><h4 style="color:#e11d48; margin-bottom:12px;">💔 กลุ่มเสี่ยง / เป็นโรคหัวใจ (1)</h4>', unsafe_allow_html=True)
+    st.markdown('<div class="kawaii-card"><h4 style="color:#e11d48; margin-bottom:12px;"><i class="bi bi-heartbreak-fill"></i> กลุ่มเสี่ยง / เป็นโรคหัวใจ (1)</h4>', unsafe_allow_html=True)
     show_safe_image("./img/heart-attack.jpg")
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="kawaii-card"><h4 style="color:#059669; margin-bottom:12px;">💚 กลุ่มปกติ / หัวใจแข็งแรง (0)</h4>', unsafe_allow_html=True)
+    st.markdown('<div class="kawaii-card"><h4 style="color:#059669; margin-bottom:12px;"><i class="bi bi-heart-fill"></i> กลุ่มปกติ / หัวใจแข็งแรง (0)</h4>', unsafe_allow_html=True)
     show_safe_image("./img/katawut.jpeg")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# 3. ส่วนแสดงสถิติข้อมูลโรคหัวใจ 🎀
+# 3. ส่วนแสดงสถิติข้อมูลโรคหัวใจ
 # ---------------------------------------------------------
 st.markdown("""
 <div class="kawaii-header-pink">
-    <h4 style="margin:0; color:white;">🎀 สถิติข้อมูลโรคหัวใจสุดคิวท์ (Heart3.csv) 🎀</h4>
+    <h4 style="margin:0; color:white;"><i class="bi bi-bar-chart-line-fill"></i> สถิติข้อมูลโรคหัวใจ (Heart3.csv)</h4>
 </div>
 """, unsafe_allow_html=True)
 
@@ -156,15 +169,15 @@ def load_heart_data():
 
 dt = load_heart_data()
 
-# แสดงการ์ดตัวเลขสรุปน่ารักๆ
+# แสดงการ์ดตัวเลขสรุป
 m1, m2, m3, m4 = st.columns(4)
-m1.metric("🧸 ข้อมูลทั้งหมด", f"{len(dt):,} ราย")
-m2.metric("💔 กลุ่มเสี่ยงโรคหัวใจ", f"{(dt['HeartDisease'] == 1).sum():,} ราย")
-m3.metric("💚 กลุ่มหัวใจแข็งแรง", f"{(dt['HeartDisease'] == 0).sum():,} ราย")
-m4.metric("🎂 อายุเฉลี่ย", f"{dt['Age'].mean():.1f} ปี")
+m1.metric("ข้อมูลทั้งหมด", f"{len(dt):,} ราย")
+m2.metric("กลุ่มเสี่ยงโรคหัวใจ (1)", f"{(dt['HeartDisease'] == 1).sum():,} ราย")
+m3.metric("กลุ่มหัวใจแข็งแรง (0)", f"{(dt['HeartDisease'] == 0).sum():,} ราย")
+m4.metric("อายุเฉลี่ยผู้ป่วย", f"{dt['Age'].mean():.1f} ปี")
 
 st.write("")
-with st.expander("📖 คลิกเพื่อแอบดูตารางข้อมูลดิบ (10 แถวแรก) ✨", expanded=True):
+with st.expander("คลิกเพื่อดูตารางข้อมูลดิบ (10 แถวแรก)", expanded=True, icon=":material/table_view:"):
     st.dataframe(dt.head(10), use_container_width=True)
 
 # คำนวณค่าเฉลี่ยของตัวแปรทั้ง 11 ตัว
@@ -189,44 +202,44 @@ dx2 = pd.DataFrame(
 if "show_chart" not in st.session_state:
     st.session_state.show_chart = False
 
-btn_col1, btn_col2, _ = st.columns([1.3, 1.3, 3])
+btn_col1, btn_col2, _ = st.columns([1.4, 1.4, 3])
 with btn_col1:
-    if st.button("🌈 แสดงการจินตทัศน์ข้อมูล", use_container_width=True, type="primary"):
+    if st.button("แสดงการจินตทัศน์ข้อมูล", icon=":material/bar_chart:", use_container_width=True, type="primary"):
         st.session_state.show_chart = True
 with btn_col2:
-    if st.button("🙈 ซ่อนกราฟไว้ก่อน", use_container_width=True):
+    if st.button("ซ่อนกราฟข้อมูล", icon=":material/visibility_off:", use_container_width=True):
         st.session_state.show_chart = False
 
 if st.session_state.show_chart:
     st.bar_chart(dx2, color="#ff758c")
 else:
-    st.info("✨ กดปุ่ม **'🌈 แสดงการจินตทัศน์ข้อมูล'** ด้านบนเพื่อดูกราฟค่าเฉลี่ยแสนน่ารักได้เลย!")
+    st.info("กดปุ่ม **'แสดงการจินตทัศน์ข้อมูล'** ด้านบนเพื่อดูกราฟค่าเฉลี่ยของแต่ละปัจจัย", icon=":material/info:")
 
 # ---------------------------------------------------------
-# 4. ส่วนรับข้อมูลและทำนายผลด้วย KNN 🩺✨
+# 4. ส่วนรับข้อมูลและทำนายผลด้วย KNN
 # ---------------------------------------------------------
 st.markdown("""
 <div class="kawaii-header-mint">
-    <h4 style="margin:0; color:#1e3a8a;">🩺 มาทำนายสุขภาพหัวใจกันเถอะ! (KNN Prediction) ✨</h4>
+    <h4 style="margin:0; color:#1e3a8a;"><i class="bi bi-clipboard2-pulse-fill"></i> ทำนายสุขภาพหัวใจ (KNN Prediction)</h4>
 </div>
 """, unsafe_allow_html=True)
 
 # แถบด้านข้างปรับแต่งโมเดล
 with st.sidebar:
-    st.markdown("### 🧸 ตั้งค่าน้องโมเดล KNN")
-    k_neighbors = st.slider("จำนวนเพื่อนบ้านใกล้เคียง (K) 🌸", min_value=1, max_value=15, value=5, step=2)
-    use_scaler = st.checkbox("✨ ปรับมาตรฐานข้อมูล (StandardScaler)", value=True)
-    st.caption("💡 แนะนำให้เปิดไว้ เพื่อให้น้อง KNN คำนวณแม่นยำขึ้นนะ!")
+    st.markdown('<h4><i class="bi bi-sliders"></i> ตั้งค่าโมเดล KNN</h4>', unsafe_allow_html=True)
+    k_neighbors = st.slider("จำนวนเพื่อนบ้านใกล้เคียง (K)", min_value=1, max_value=15, value=5, step=2)
+    use_scaler = st.checkbox("ปรับมาตรฐานข้อมูล (StandardScaler)", value=True)
+    st.caption("แนะนำให้เปิดใช้งาน เพื่อให้โมเดล KNN คำนวณระยะห่างระหว่างตัวแปรได้แม่นยำขึ้น")
 
 # แบ่งช่องกรอกข้อมูล 3 คอลัมน์
 in_col1, in_col2, in_col3 = st.columns(3)
 
 with in_col1:
-    st.markdown("##### 🐰 ข้อมูลทั่วไปและอาการ")
-    age = st.slider("อายุ (Age) 🎂", min_value=1, max_value=120, value=40)
-    sex = st.selectbox("เพศ (Sex) 🚻", options=[1, 0], format_func=lambda x: "1 = ชาย 👦" if x == 1 else "0 = หญิง 👧")
+    st.markdown('<div class="sub-title-icon"><i class="bi bi-person-heart"></i> ข้อมูลทั่วไปและอาการ</div>', unsafe_allow_html=True)
+    age = st.slider("อายุ (Age)", min_value=1, max_value=120, value=40)
+    sex = st.selectbox("เพศ (Sex)", options=[1, 0], format_func=lambda x: "1 = ชาย" if x == 1 else "0 = หญิง")
     cp_type = st.selectbox(
-        "อาการเจ็บหน้าอก (ChestPainType) 💓",
+        "อาการเจ็บหน้าอก (ChestPainType)",
         options=[1, 2, 3, 4],
         index=1,
         format_func=lambda x: {
@@ -237,26 +250,26 @@ with in_col1:
         }[x]
     )
     ea = st.selectbox(
-        "เจ็บหน้าอกตอนออกกำลังกาย (ExerciseAngina) 🏃‍♀️",
+        "เจ็บหน้าอกตอนออกกำลังกาย (ExerciseAngina)",
         options=[0, 1],
-        format_func=lambda x: "1 = ใช่ (มีอาการ) 😣" if x == 1 else "0 = ไม่ (สบายดี) 😊"
+        format_func=lambda x: "1 = ใช่ (มีอาการ)" if x == 1 else "0 = ไม่ (ไม่มีอาการ)"
     )
 
 with in_col2:
-    st.markdown("##### 🍓 ความดันและผลตรวจเลือด")
-    r_bp = st.number_input("ความดันโลหิตขณะพัก (RestingBP) 🩺", min_value=0, max_value=250, value=120)
-    Ch = st.number_input("คอเลสเตอรอล (Cholesterol) 🍔", min_value=0, max_value=700, value=200)
+    st.markdown('<div class="sub-title-icon"><i class="bi bi-droplet-half"></i> ความดันและผลตรวจเลือด</div>', unsafe_allow_html=True)
+    r_bp = st.number_input("ความดันโลหิตขณะพัก (RestingBP)", min_value=0, max_value=250, value=120)
+    Ch = st.number_input("คอเลสเตอรอล (Cholesterol)", min_value=0, max_value=700, value=200)
     f_bs = st.selectbox(
-        "น้ำตาลในเลือด (FastingBS) 🍬",
+        "น้ำตาลในเลือด (FastingBS)",
         options=[0, 1],
-        format_func=lambda x: "1 = > 120 mg/dl 🍭" if x == 1 else "0 = ปกติ (<= 120 mg/dl) 🥗"
+        format_func=lambda x: "1 = > 120 mg/dl" if x == 1 else "0 = ปกติ (<= 120 mg/dl)"
     )
-    m_hr = st.number_input("อัตราการเต้นหัวใจสูงสุด (MaxHR) 💓", min_value=50, max_value=250, value=150)
+    m_hr = st.number_input("อัตราการเต้นหัวใจสูงสุด (MaxHR)", min_value=50, max_value=250, value=150)
 
 with in_col3:
-    st.markdown("##### 🌸 ผลคลื่นไฟฟ้าหัวใจ (ECG)")
+    st.markdown('<div class="sub-title-icon"><i class="bi bi-activity"></i> ผลคลื่นไฟฟ้าหัวใจ (ECG)</div>', unsafe_allow_html=True)
     r_ecg = st.selectbox(
-        "คลื่นไฟฟ้าหัวใจขณะพัก (RestingECG) 📈",
+        "คลื่นไฟฟ้าหัวใจขณะพัก (RestingECG)",
         options=[1, 2, 3],
         index=1,
         format_func=lambda x: {
@@ -265,9 +278,9 @@ with in_col3:
             3: "3 - คลื่น ST-T ผิดปกติ (ST)"
         }[x]
     )
-    Old = st.number_input("ค่าความผิดปกติของคลื่นหัวใจ (Oldpeak) 📉", min_value=-5.0, max_value=10.0, value=0.0, step=0.1)
+    Old = st.number_input("ค่าความผิดปกติของคลื่นหัวใจ (Oldpeak)", min_value=-5.0, max_value=10.0, value=0.0, step=0.1)
     st_s = st.selectbox(
-        "ความชันกราฟ ST (ST_Slope) 📐",
+        "ความชันกราฟ ST (ST_Slope)",
         options=[1, 2, 3],
         index=1,
         format_func=lambda x: {
@@ -278,7 +291,7 @@ with in_col3:
     )
 
 st.write("")
-if st.button("💖 กดเพื่อทำนายผลเลย! ✨", use_container_width=True, type="primary"):
+if st.button("กดเพื่อทำนายผล", icon=":material/favorite:", use_container_width=True, type="primary"):
     X = dt.drop('HeartDisease', axis=1)
     y = dt['HeartDisease']
     
@@ -306,15 +319,25 @@ if st.button("💖 กดเพื่อทำนายผลเลย! ✨", us
 
     with res_col1:
         if out[0] == 1:
-            st.error(f"### 🥺 ผลการทำนาย: มีความเสี่ยงเป็นโรคหัวใจ (1)\nโอกาสเสี่ยงที่น้อง AI คำนวณได้คือ **{prob[1]*100:.1f}%** (อ้างอิงจากเพื่อนบ้าน K = {k_neighbors})\n\n💌 *ดูแลสุขภาพด้วยน้า แนะนำให้ลองปรึกษาคุณหมอเพื่อตรวจเช็กอย่างละเอียดนะครับ!*")
+            st.error(
+                f"### ผลการทำนาย: มีความเสี่ยงเป็นโรคหัวใจ (1)\n"
+                f"โอกาสเสี่ยงที่คำนวณได้คือ **{prob[1]*100:.1f}%** (อ้างอิงจากเพื่อนบ้าน K = {k_neighbors})\n\n"
+                f"*คำแนะนำ: ควรดูแลสุขภาพและปรึกษาแพทย์เฉพาะทางเพื่อตรวจวินิจฉัยอย่างละเอียด*",
+                icon=":material/warning:"
+            )
         else:
             st.balloons()
-            st.success(f"### 🎉 เย้! ผลการทำนาย: ปกติ / หัวใจแข็งแรง (0)\nความน่าจะเป็นที่หัวใจปกติสูงถึง **{prob[0]*100:.1f}%** (ความเสี่ยงเพียง {prob[1]*100:.1f}%, ค่า K = {k_neighbors})\n\n🌟 *สุขภาพดีมากเลย! รักษาสุขภาพและออกกำลังกายสม่ำเสมอต่อไปนะครับ!*")
+            st.success(
+                f"### ผลการทำนาย: ปกติ / หัวใจแข็งแรง (0)\n"
+                f"ความน่าจะเป็นที่หัวใจปกติสูงถึง **{prob[0]*100:.1f}%** (ความเสี่ยงเพียง {prob[1]*100:.1f}%, ค่า K = {k_neighbors})\n\n"
+                f"*คำแนะนำ: รักษาสุขภาพและออกกำลังกายสม่ำเสมอต่อไปนะครับ*",
+                icon=":material/check_circle:"
+            )
 
     with res_col2:
         if out[0] == 1:
-            show_safe_image("./img/heart-attack.jpg", caption="💔 กลุ่มเสี่ยง / เป็นโรคหัวใจ")
+            show_safe_image("./img/heart-attack.jpg", caption="กลุ่มเสี่ยง / เป็นโรคหัวใจ")
         else:
-            show_safe_image("./img/katawut.jpeg", caption="💚 กลุ่มปกติ / หัวใจแข็งแรง")
+            show_safe_image("./img/katawut.jpeg", caption="กลุ่มปกติ / หัวใจแข็งแรง")
 else:
-    st.caption("🌸 กรอกข้อมูลด้านบนให้ครบ แล้วกดปุ่ม **'💖 กดเพื่อทำนายผลเลย! ✨'** เพื่อดูผลลัพธ์น้า~")
+    st.caption("กรอกข้อมูลด้านบนให้ครบถ้วน แล้วกดปุ่ม **'กดเพื่อทำนายผล'** เพื่อดูผลลัพธ์")
