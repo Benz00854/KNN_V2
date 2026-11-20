@@ -23,7 +23,7 @@ html_7 = """
 """
 st.markdown(html_7, unsafe_allow_html=True)
 st.markdown("")
-dt = pd.read_csv("./data/iris.csv")
+dt = pd.read_csv("./data/Heart3.csv")
 st.write(dt.head(10))
 
 dt1 = dt['petallength'].sum()
@@ -50,11 +50,17 @@ st.markdown(html_8, unsafe_allow_html=True)
 st.markdown("")
 
 
-pt_len = st.slider("กรุณาเลือกข้อมูล petal.length")
-pt_wd = st.slider("กรุณาเลือกข้อมูล petal.width")
-
-sp_len = st.number_input("กรุณาเลือกข้อมูล sepal.length")
-sp_wd = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+age = st.slider("กรุณาเลือกข้อมูล petal.length")
+sex = st.slider("กรุณาเลือกข้อมูล petal.width")
+cp_type = st.number_input("กรุณาเลือกข้อมูล sepal.length")
+r_bp = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+Ch = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+f_bs = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+r_ecg = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+m_hr = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+ea = st.number_input("กรุณาเลือกข้อมูล sepal.width")
+Old =  st.number_input("กรุณาเลือกข้อมูล sepal.width")
+st_s = st.number_input("กรุณาเลือกข้อมูล sepal.width")
 
 if st.button("ทำนายผล"):
    #st.write("ทำนาย")
@@ -65,16 +71,14 @@ if st.button("ทำนายผล"):
    Knn_model = KNeighborsClassifier(n_neighbors=3)
    Knn_model.fit(X, y)  
 
-   x_input = np.array([[pt_len, pt_wd, sp_len, sp_wd]]) #ข้อมูลใหม่สำหรับทำนาย
+   x_input = np.array([[age, sex, cp_type, r_bp, Ch, f_bs, r_ecg, m_hr, ea, Old, st_s]]) #ข้อมูลใหม่สำหรับทำนาย
 
    st.write(Knn_model.predict(x_input))   
    out=Knn_model.predict(x_input)
 
    if out[0] == 'Setosa':
-    st.image("./img/iris1.jpg")
-   elif out[0] == 'Versicolor':       
-    st.image("./img/iris2.jpg")
+    st.image("./img/heart-attack.jpg")
    else:
-    st.image("./img/iris3.jpg")
+    st.image("./img/katawut.jpeg")
 else:
     st.write("ไม่ทำนาย")
