@@ -1,8 +1,4 @@
-numpy
-pandas
-matplotlib
-seaborn
 streamlit
-plotly==5.9.0
-openpyxl
+pandas
+numpy
 scikit-learn
